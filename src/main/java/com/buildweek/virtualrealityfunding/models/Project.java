@@ -19,11 +19,11 @@ public class Project extends Auditable
     private long projectid;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "investorid")
-    @JsonIgnoreProperties("project")
-    //ties investor to investor projects
-    private List<Investor> investors = new ArrayList<>();
+//    @ManyToMany(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "investorid")
+//    @JsonIgnoreProperties("project")
+//    //ties investor to investor projects
+////    private List<Investor> investors = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "userid")
@@ -85,7 +85,7 @@ public class Project extends Auditable
         return user;
     }
 
-    public void setUser(User User)
+    public void setUser(User user)
     {
         this.user = user ;
     }

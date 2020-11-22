@@ -62,22 +62,19 @@ public class ProjectController
     @PostMapping(value = "/project",
                  consumes = {"application/json"},
                  produces = {"application/json"})
-    public ResponseEntity<?> addNewProject(HttpServletRequest request, Authentication authentication, @Valid
+    public ResponseEntity<?> addNewProject(Authentication authentication, @Valid
     @RequestBody(required = false)
             Project newproject) throws URISyntaxException
     {
-        logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
-
-
         newproject.setUser(userRepository.findByUsername(authentication.getName().toLowerCase()));
         projectService.save(newproject);
 
         // set the location header for the newly created resource
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newProjectURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{projectid}").buildAndExpand(newproject.getProjectid()).toUri();
-        responseHeaders.setLocation(newProjectURI);
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newProjectURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{projectid}").buildAndExpand(newproject.getProjectid()).toUri();
+//        responseHeaders.setLocation(newProjectURI);
 
-        return new ResponseEntity<>(responseHeaders, HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //update
@@ -95,8 +92,7 @@ public class ProjectController
     }
 
     @DeleteMapping(value = "/post/{id}")
-    public ResponseEntity<?> deleteProject(HttpServletRequest request,
-                                                    long id)
+    public ResponseEntity<?> deleteProject(HttpServletRequest request, @PathVariable long id)
     {
         logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + "accessed");
         projectService.delete(id);

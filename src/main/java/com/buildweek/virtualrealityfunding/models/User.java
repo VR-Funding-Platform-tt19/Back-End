@@ -29,7 +29,8 @@ public class User extends Auditable
     private String password;
 
     @OneToMany(mappedBy = "user",
-               cascade = CascadeType.ALL)
+               cascade = CascadeType.ALL,
+                orphanRemoval = true)
     @JsonIgnoreProperties("user")
     private List<UserRoles> userroles = new ArrayList<>();
 
@@ -39,27 +40,29 @@ public class User extends Auditable
     @JsonIgnoreProperties("user")
     private List<Useremail> useremails = new ArrayList<>();
 
-    @OneToMany(
-               cascade = CascadeType.ALL,
-               orphanRemoval = true)
-    @JoinColumn(name ="investuser")
-    @JsonIgnoreProperties("user")
-    private List<Investor> investors = new ArrayList<>();
+//    @OneToMany(
+//               cascade = CascadeType.ALL,
+//               orphanRemoval = true,
+//                mappedBy = "user")
+//    @JsonIgnoreProperties("user")
+//    private List<Investor> investors = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "user",
-            cascade = CascadeType.ALL)
+            cascade = CascadeType.ALL,
+            orphanRemoval = true)
     @JsonIgnoreProperties("user")
     private List<Project> projects = new ArrayList<>();
 
 
     //test
-    @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    @JoinColumn(name = "entrepreneuruser")
-    @JsonIgnoreProperties("user")
-    private List<Entrepreneur> entrepreneurs = new ArrayList<>();
+//    @OneToMany(
+//            cascade = CascadeType.ALL,
+//            orphanRemoval = true,
+//            mappedBy = "user")
+//    @JoinColumn(name = "entrepreneuruser")
+//    @JsonIgnoreProperties("user")
+//    private List<Entrepreneur> entrepreneurs = new ArrayList<>();
 
     /// register
     /// choose investor or entrepreneur
@@ -175,24 +178,24 @@ public class User extends Auditable
         return "User{" + "userid=" + userid + ", username='" + username + '\'' + ", password='" + password + '\'' + ", userRoles=" + userroles + ", useremails=" + useremails + '}';
     }
 
-    public List<Investor> getInvestors()
-    {
-        return investors;
-    }
-
-    public void setInvestors(List<Investor> investors)
-    {
-        this.investors = investors;
-
-    }
-
-    public List<Entrepreneur> getEntrepreneurs()
-    {
-        return entrepreneurs;
-    }
-
-    public void setEntrepreneurs(List<Entrepreneur> entrepreneurs)
-    {
-        this.entrepreneurs = entrepreneurs;
-    }
+//    public List<Investor> getInvestors()
+//    {
+//        return investors;
+//    }
+//
+//    public void setInvestors(List<Investor> investors)
+//    {
+//        this.investors = investors;
+//
+//    }
+//
+//    public List<Entrepreneur> getEntrepreneurs()
+//    {
+//        return entrepreneurs;
+//    }
+//
+//    public void setEntrepreneurs(List<Entrepreneur> entrepreneurs)
+//    {
+//        this.entrepreneurs = entrepreneurs;
+//    }
 }

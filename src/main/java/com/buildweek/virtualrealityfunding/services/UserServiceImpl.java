@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserDetailsService, UserService
     @Autowired
     private RoleRepository rolerepos;
 
-    @Autowired
-    private InvestorService investorService;
+//    @Autowired
+//    private InvestorService investorService;
 
     @Transactional
     @Override
@@ -200,41 +200,41 @@ public class UserServiceImpl implements UserDetailsService, UserService
 
     //////try to connect the investor to the update the user and
     ///// create the association to the investor
-    @Transactional
-    @Override
-public User addNewInvestor(Investor investor)
-    {
-        Investor newInvestor = investorService.save(investor);
-        User user = new User();
-        if (userrepos.findByUsername(user.getUsername()) != null)
-        {
-            throw new ResourceFoundException(user.getUsername() + " is already taken!");
-        }
-
-        User newUser = new User();
-        newUser.setUsername(user.getUsername());
-        newUser.setPasswordNoEncrypt(user.getPassword());
-
-    //    newUser.setUsertype("investor");
-    //    newUser.setInvestor(investorid);
-
-        ArrayList<UserRoles> newRoles = new ArrayList<>();
-        for (UserRoles ur : user.getUserroles())
-        {
-            long id = ur.getRole()
-                    .getRoleid();
-            Role role = rolerepos.findById(id)
-                    .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
-            newRoles.add(new UserRoles(newUser, ur.getRole()));
-        }
-        newUser.setUserroles(newRoles);
-
-        for (Useremail ue : user.getUseremails())
-        {
-            newUser.getUseremails()
-                    .add(new Useremail(newUser, ue.getUseremail()));
-        }
-
-        return userrepos.save(newUser);
-    }
+//    @Transactional
+//    @Override
+//public User addNewInvestor(Investor investor)
+//    {
+////        Investor newInvestor = investorService.save(investor);
+//        User user = new User();
+//        if (userrepos.findByUsername(user.getUsername()) != null)
+//        {
+//            throw new ResourceFoundException(user.getUsername() + " is already taken!");
+//        }
+//
+//        User newUser = new User();
+//        newUser.setUsername(user.getUsername());
+//        newUser.setPasswordNoEncrypt(user.getPassword());
+//
+//    //    newUser.setUsertype("investor");
+//    //    newUser.setInvestor(investorid);
+//
+//        ArrayList<UserRoles> newRoles = new ArrayList<>();
+//        for (UserRoles ur : user.getUserroles())
+//        {
+//            long id = ur.getRole()
+//                    .getRoleid();
+//            Role role = rolerepos.findById(id)
+//                    .orElseThrow(() -> new ResourceNotFoundException("Role id " + id + " not found!"));
+//            newRoles.add(new UserRoles(newUser, ur.getRole()));
+//        }
+//        newUser.setUserroles(newRoles);
+//
+//        for (Useremail ue : user.getUseremails())
+//        {
+//            newUser.getUseremails()
+//                    .add(new Useremail(newUser, ue.getUseremail()));
+//        }
+//
+//        return userrepos.save(newUser);
+//    }
 }

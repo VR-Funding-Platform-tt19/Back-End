@@ -81,6 +81,11 @@ public class ProjectServiceImpl implements ProjectService
                 newProject.setProjectimage(project.getProjectimage());
             }
 
+            if (project.getFundedamt() != 0)
+            {
+                newProject.setFundedamt(project.getFundedamt());
+            }
+
         return projrepo.save(newProject);
     }
 

@@ -45,11 +45,10 @@ public class OpenController
     @RequestBody
             User newuser) throws URISyntaxException
     {
-        logger.trace(request.getMethod()
-                            .toUpperCase() + " " + request.getRequestURI() + " accessed");
+        logger.trace(request.getMethod().toUpperCase() + " " + request.getRequestURI() + " accessed");
 
         ArrayList<UserRoles> newRoles = new ArrayList<>();
-        newRoles.add(new UserRoles(newuser, roleService.findByName("user")));
+        newRoles.add(new UserRoles(newuser, roleService.findByName("admin")));
         newuser.setUserroles(newRoles);
 
         newuser = userService.save(newuser);

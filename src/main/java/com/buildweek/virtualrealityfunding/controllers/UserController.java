@@ -1,11 +1,11 @@
 package com.buildweek.virtualrealityfunding.controllers;
 
 
-import com.buildweek.virtualrealityfunding.models.Entrepreneur;
-import com.buildweek.virtualrealityfunding.models.Investor;
+//import com.buildweek.virtualrealityfunding.models.Entrepreneur;
+//import com.buildweek.virtualrealityfunding.models.Investor;
 import com.buildweek.virtualrealityfunding.models.User;
-import com.buildweek.virtualrealityfunding.services.EntrepreneurService;
-import com.buildweek.virtualrealityfunding.services.InvestorService;
+//import com.buildweek.virtualrealityfunding.services.EntrepreneurService;
+//import com.buildweek.virtualrealityfunding.services.InvestorService;
 import com.buildweek.virtualrealityfunding.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +42,11 @@ public class UserController
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private InvestorService investorService;
-
-    @Autowired
-    private EntrepreneurService entrepreneurService;
+//    @Autowired
+//    private InvestorService investorService;
+//
+//    @Autowired
+//    private EntrepreneurService entrepreneurService;
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping(value = "/users",
@@ -178,52 +178,52 @@ public class UserController
 
 //INVESTOR CREATE ENDPOINTS
     ////trying to create new endpoints associated with the new investor and
-    @PostMapping(value = "/createInvestor",
-                 consumes = {"application/json"},
-                 produces = {"application/json"})
-    public ResponseEntity<?> createInvestor(
-            @RequestBody
-                    Investor investor) throws URISyntaxException
-    {
-        Investor newInvestor = investorService.save(investor);
-        newInvestor.setInvestamt(investor.getInvestamt());
-        newInvestor.setName(investor.getName());
-        newInvestor.setEmail(investor.getEmail());
-        newInvestor.setInvestamt(investor.getInvestamt());
-        newInvestor.setLocation(investor.getLocation());
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newInvURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{investorid}").buildAndExpand(newInvestor.getInvestorid()).toUri();
-        responseHeaders.setLocation(newInvURI);
-
-        return new ResponseEntity<>( HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "/createInvestor",
+//                 consumes = {"application/json"},
+//                 produces = {"application/json"})
+//    public ResponseEntity<?> createInvestor(
+//            @RequestBody
+//                    Investor investor) throws URISyntaxException
+//    {
+//        Investor newInvestor = investorService.save(investor);
+//        newInvestor.setInvestamt(investor.getInvestamt());
+//        newInvestor.setName(investor.getName());
+//        newInvestor.setEmail(investor.getEmail());
+//        newInvestor.setInvestamt(investor.getInvestamt());
+//        newInvestor.setLocation(investor.getLocation());
+//
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newInvURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{investorid}").buildAndExpand(newInvestor.getInvestorid()).toUri();
+//        responseHeaders.setLocation(newInvURI);
+//
+//        return new ResponseEntity<>( HttpStatus.CREATED);
+//    }
 
 //ENTREPRENEUR CREATE ENDPOOINT
-    @PostMapping(value = "/createEntrepreneur",
-                 consumes = {"application/json"},
-                 produces = {"application/json"})
-    public ResponseEntity<?> createEntrepreneur(
-            @RequestBody
-                    Entrepreneur entrepreneur) throws URISyntaxException
-    {
-        Entrepreneur newEntrepreneur = new Entrepreneur();
-        newEntrepreneur.setBio(entrepreneur.getBio());
-        newEntrepreneur.setRequestamt(entrepreneur.getRequestamt());
-        newEntrepreneur.setPhone(entrepreneur.getPhone());
-        newEntrepreneur.setName(entrepreneur.getName());
-        newEntrepreneur.setEmail(entrepreneur.getEmail());
-        newEntrepreneur.setLocation(entrepreneur.getLocation());
-        newEntrepreneur.setEntrepreneurid(entrepreneur.getEntrepreneurid());
-
-        entrepreneurService.save(newEntrepreneur);
-
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newInvURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{investorid}").buildAndExpand(entrepreneur.getEntrepreneurid()).toUri();
-        responseHeaders.setLocation(newInvURI);
-
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
-    }
+//    @PostMapping(value = "/createEntrepreneur",
+//                 consumes = {"application/json"},
+//                 produces = {"application/json"})
+//    public ResponseEntity<?> createEntrepreneur(
+//            @RequestBody
+//                    Entrepreneur entrepreneur) throws URISyntaxException
+//    {
+//        Entrepreneur newEntrepreneur = new Entrepreneur();
+//        newEntrepreneur.setBio(entrepreneur.getBio());
+//        newEntrepreneur.setRequestamt(entrepreneur.getRequestamt());
+//        newEntrepreneur.setPhone(entrepreneur.getPhone());
+//        newEntrepreneur.setName(entrepreneur.getName());
+//        newEntrepreneur.setEmail(entrepreneur.getEmail());
+//        newEntrepreneur.setLocation(entrepreneur.getLocation());
+//        newEntrepreneur.setEntrepreneurid(entrepreneur.getEntrepreneurid());
+//
+//        entrepreneurService.save(newEntrepreneur);
+//
+//        HttpHeaders responseHeaders = new HttpHeaders();
+//        URI newInvURI = ServletUriComponentsBuilder.fromCurrentRequest().path("/{investorid}").buildAndExpand(entrepreneur.getEntrepreneurid()).toUri();
+//        responseHeaders.setLocation(newInvURI);
+//
+//        return new ResponseEntity<>(null, responseHeaders, HttpStatus.CREATED);
+//    }
 
 
 }
